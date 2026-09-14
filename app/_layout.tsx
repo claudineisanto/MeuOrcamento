@@ -6,6 +6,7 @@ import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
 
 import PinGate from '@/components/app/PinGate';
+import WebDesktopShell from '@/components/app/WebDesktopShell';
 import { withBaseUrl } from '@/constants/web';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
@@ -26,27 +27,29 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <PinGate>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen
-            name="detail"
-            options={{ headerShown: false, title: 'Detalhamento' }}
-          />
-          <Stack.Screen
-            name="meta"
-            options={{ headerShown: false, title: 'Meta do Mês' }}
-          />
-          <Stack.Screen
-            name="profile"
-            options={{ headerShown: false, title: 'Meu Perfil' }}
-          />
-          <Stack.Screen
-            name="modal"
-            options={{ presentation: 'modal', title: 'Novo Lançamento', headerShown: false }}
-          />
-        </Stack>
-      </PinGate>
+      <WebDesktopShell>
+        <PinGate>
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen
+              name="detail"
+              options={{ headerShown: false, title: 'Detalhamento' }}
+            />
+            <Stack.Screen
+              name="meta"
+              options={{ headerShown: false, title: 'Meta do Mês' }}
+            />
+            <Stack.Screen
+              name="profile"
+              options={{ headerShown: false, title: 'Meu Perfil' }}
+            />
+            <Stack.Screen
+              name="modal"
+              options={{ presentation: 'modal', title: 'Novo Lançamento', headerShown: false }}
+            />
+          </Stack>
+        </PinGate>
+      </WebDesktopShell>
       <StatusBar style="auto" />
     </ThemeProvider>
   );

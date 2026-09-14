@@ -27,7 +27,7 @@ export default function WebDesktopShell({ children }: PropsWithChildren) {
             <Image
               source={require('../../assets/images/svg/icon1.png')}
               style={styles.heroImage}
-              resizeMode="contain"
+              resizeMode="cover"
             />
           </View>
 
@@ -71,9 +71,9 @@ const styles = StyleSheet.create({
     flex: 1,
     minHeight: 0,
     borderRadius: 32,
-    backgroundColor: 'rgba(255,255,255,0.10)',
+    backgroundColor: '#FFFFFF',
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.16)',
+    borderColor: 'rgba(255,255,255,0.28)',
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
