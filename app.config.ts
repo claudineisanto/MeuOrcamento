@@ -18,7 +18,10 @@ export default (): ExpoConfig => {
 
   return {
     ...config,
-    ...(baseUrl ? { baseUrl } : {}),
+    experiments: {
+      ...(config.experiments ?? {}),
+      ...(baseUrl ? { baseUrl } : {}),
+    },
     extra: {
       ...(config.extra ?? {}),
       baseUrl,
