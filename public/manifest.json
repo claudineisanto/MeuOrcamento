@@ -1,0 +1,25 @@
+{
+  "short_name": "Orcamento",
+  "name": "Meu Orçamento",
+  "description": "Controle seus gastos, metas e receitas em um app instalável.",
+  "start_url": "/MeuOrcamento/",
+  "scope": "/MeuOrcamento/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#2E7D32",
+  "background_color": "#F8F9FA",
+  "icons": [
+    {
+      "src": "/MeuOrcamento/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/MeuOrcamento/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

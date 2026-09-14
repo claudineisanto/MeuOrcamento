@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Manual de Orientações - Meu Orçamento</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 18mm 16mm; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+    color: #1f2937;
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+  .cover {
+    text-align: center;
+    padding: 60px 40px 40px;
+    background: linear-gradient(135deg, #E8F5E9 0%, #FFFFFF 100%);
+    border-radius: 16px;
+    margin-bottom: 28px;
+    page-break-after: always;
+  }
+  .cover-logo {
+    width: 160px; height: 160px; border-radius: 44px; margin: 0 auto 28px;
+    background: linear-gradient(135deg, #4CAF50, #1B5E20);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 72px; font-weight: 900;
+    box-shadow: 0 18px 40px rgba(76,175,80,0.25);
+  }
+  h1 { color: #1B5E20; font-size: 30pt; margin: 0 0 8px; }
+  .cover-sub { color: #388E3C; font-size: 14pt; font-weight: 600; margin: 0 0 40px; }
+  .cover-info { color: #6b7280; font-size: 11pt; }
+  h2 {
+    color: #1B5E20;
+    font-size: 18pt;
+    margin: 36px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 3px solid #4CAF50;
+    page-break-after: avoid;
+  }
+  h3 {
+    color: #2E7D32;
+    font-size: 13pt;
+    margin: 22px 0 8px;
+    page-break-after: avoid;
+  }
+  p { margin: 6px 0 10px; }
+  ul, ol { padding-left: 22px; margin: 8px 0 14px; }
+  li { margin: 4px 0 6px; }
+  .intro-box {
+    background: #F1F8E9;
+    border-left: 6px solid #4CAF50;
+    padding: 14px 18px;
+    border-radius: 10px;
+    margin: 12px 0 20px;
+  }
+  .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 14px 0 20px; }
+  .card {
+    border: 1px solid #C8E6C9;
+    border-radius: 12px;
+    padding: 14px 16px;
+    background: #fff;
+    page-break-inside: avoid;
+  }
+  .card-title {
+    color: #2E7D32;
+    font-weight: 700;
+    font-size: 12pt;
+    margin-bottom: 6px;
+  }
+  .tag { display: inline-block; background: #E8F5E9; color: #2E7D32;
+    padding: 2px 10px; border-radius: 999px; font-size: 9.5pt;
+    font-weight: 600; margin-right: 6px; }
+  .tag.w { background: #FFEBEE; color: #C62828; }
+  .tag.b { background: #E3F2FD; color: #1565C0; }
+  .tag.o { background: #FFF3E0; color: #E65100; }
+  .warn {
+    background: #FFF8E1;
+    border-left: 6px solid #FF9800;
+    padding: 12px 16px; border-radius: 10px; margin: 12px 0 18px;
+  }
+  .danger {
+    background: #FFEBEE;
+    border-left: 6px solid #F44336;
+    padding: 12px 16px; border-radius: 10px; margin: 12px 0 18px;
+  }
+  .success {
+    background: #E8F5E9;
+    border-left: 6px solid #4CAF50;
+    padding: 12px 16px; border-radius: 10px; margin: 12px 0 18px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0 18px;
+    font-size: 11pt;
+  }
+  th, td { border: 1px solid #C5E1A5; padding: 9px 12px; text-align: left; vertical-align: top; }
+  th { background: linear-gradient(135deg, #4CAF50, #2E7D32); color: #fff; font-weight: 700; }
+  tr:nth-child(even) td { background: #F9FBE7; }
+  code, .cmd {
+    font-family: Consolas, "Courier New", monospace;
+    background: #1f2937; color: #A5D6A7;
+    padding: 2px 8px; border-radius: 6px; font-size: 10.5pt;
+    display: inline-block; margin: 2px 0;
+  }
+  .cmd-block { display: block; padding: 10px 14px; margin: 8px 0 14px; white-space: pre-wrap; word-break: break-all; }
+  .step { display: flex; align-items: flex-start; gap: 14px; margin: 10px 0 14px; page-break-inside: avoid; }
+  .step-n {
+    flex-shrink: 0;
+    width: 34px; height: 34px; border-radius: 50%;
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    color: #fff; font-weight: 800; font-size: 12pt;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .footer {
+    margin-top: 40px; padding-top: 14px; border-top: 1px solid #C8E6C9;
+    color: #6b7280; font-size: 9.5pt; text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<section class="cover">
+  <div class="cover-logo">R$</div>
+  <h1>Meu Orçamento</h1>
+  <p class="cover-sub">Manual de Orientações de Uso</p>
+  <p class="cover-info">
+    Versão do aplicativo: 1.0.0 · Atualizado em 2026<br>
+    Aplicativo de controle financeiro familiar · 100% offline
+  </p>
+</section>
+
+<h2 id="sobre">1. Sobre o aplicativo</h2>
+<div class="intro-box">
+  <strong>Meu Orçamento</strong> é um gerenciador financeiro pessoal e familiar projetado para ser <strong>simples, seguro e 100% offline</strong>.
+  Nenhum dado seu é enviado para servidores externos — tudo fica armazenado diretamente no armazenamento interno do seu celular.
+</div>
+<p>O app permite:</p>
+<ul>
+  <li>Registrar receitas (salários, freelas, aluguel, investimentos etc.) e despesas (moradia, cartão, saúde, alimentação etc).</li>
+  <li>Definir uma meta mensal de gastos baseada na sua receita e acompanhar o progresso em tempo real.</li>
+  <li>Visualizar gráficos de gastos por categoria, filtros e relatórios consolidados do mês.</li>
+  <li>Cadastrar perfil com nome e foto personalizada.</li>
+</ul>
+
+<h2 id="instala">2. Como iniciar o app no Windows / Android</h2>
+<p>O aplicativo foi desenvolvido com Expo SDK 54. Para rodá-lo no seu celular Sony Xperia (ou qualquer outro Android), siga os passos abaixo.</p>
+
+<h3>2.1. Autorização USB (opcional — recomendado para testes)</h3>
+<ol>
+  <li>Ative as Opções do Desenvolvedor no Android: vá em <strong>Configurações &gt; Sobre o telefone</strong> e toque 7 vezes em "Número da versão".</li>
+  <li>Volte para <strong>Configurações &gt; Opções do desenvolvedor</strong> e ative <strong>"Depuração USB"</strong>.</li>
+  <li>Conecte o cabo USB no computador. No popup, marque <strong>"Sempre permitir desta máquina"</strong> e toque em <strong>Permitir</strong>.</li>
+  <li>Rode o script <code>autorizar-dispositivo.cmd</code> (na pasta <code>c:\MeuOrsamento</code>) em caso de "unauthorized".</li>
+</ol>
+
+<h3>2.2. Comando para iniciar no dispositivo (modo USB)</h3>
+<pre class="cmd cmd-block">cd c:\MeuOrsamento\MeuOrcamento
+npx expo start --android --clear</pre>
+
+<h3>2.3. Modo Expo Go via Wi-Fi / QR Code (alternativa sem cabo USB)</h3>
+<pre class="cmd cmd-block">cd c:\MeuOrsamento\MeuOrcamento
+npx expo start --clear</pre>
+<p>Depois abra o app <strong>Expo Go</strong> no celular e escaneie o QR Code que aparecerá no terminal (ou aperte a tecla <code>w</code> para abrir no navegador, <code>a</code> para Android).</p>
+
+<div class="warn">
+  <strong>⚠️ Dica importante:</strong> Sempre que iniciar, use a flag <code>--clear</code> — ela limpa o cache do Metro e evita erros de rotas, permissões ou módulos desatualizados.
+</div>
+
+<h2 id="telas">3. Visão geral das telas</h2>
+<div class="card-grid">
+  <div class="card">
+    <div class="card-title">🏠 Dashboard (Início)</div>
+    Visão geral do mês: saudação personalizada, saldo disponível, cartão de compromissos, categorias com barras de progresso e meta.
+  </div>
+  <div class="card">
+    <div class="card-title">📊 Relatório</div>
+    Lista completa de todos os gastos do mês, soma total, gráfico colorido por categoria, filtros (fixas / variáveis / categorias) e busca por descrição.
+  </div>
+  <div class="card">
+    <div class="card-title">➕ Novo Lançamento</div>
+    Modal flutuante que registra entradas (receitas) ou saídas (despesas) com valor, data, categoria e subcategoria.
+  </div>
+  <div class="card">
+    <div class="card-title">🎯 Meta do Mês</div>
+    Tela para definir sua meta de gastos mensal. Mostra receita atual, sobra planejada e sobra real. Acessível pelo chip azul 🔔 Meta no cabeçalho.
+  </div>
+  <div class="card">
+    <div class="card-title">👤 Perfil</div>
+    Cadastro simples com nome e foto (câmera ou galeria). Acessível tocando na foto/iniciais no canto superior esquerdo.
+  </div>
+  <div class="card">
+    <div class="card-title">🔍 Detalhe Categoria</div>
+    Toca em qualquer categoria do Dashboard para ver detalhe completo, orçamento, valor gasto e lista de lançamentos daquela categoria.
+  </div>
+</div>
+
+<h2 id="lancar">4. Como lançar receitas e despesas</h2>
+
+<div class="step"><div class="step-n">1</div>
+<div>
+  <strong>Toque no botão verde flutuante "＋"</strong> no canto inferior direito. Isso abre o modal de novo lançamento.
+</div>
+</div>
+
+<div class="step"><div class="step-n">2</div>
+<div>
+  <strong>Escolha o tipo:</strong> <span class="tag w">🔴 Despesa</span> ou <span class="tag">🟢 Receita</span>.
+  <p>Trocar o tipo atualiza automaticamente a lista de categorias abaixo.</p>
+</div>
+</div>
+
+<div class="step"><div class="step-n">3</div>
+<div>
+  <strong>Digite o valor</strong> usando a máscara monetária automática (formato R$ 1.234,56).
+</div>
+</div>
+
+<div class="step"><div class="step-n">4</div>
+<div>
+  <strong>Escolha categoria &gt; subcategoria</strong>. Exemplos:
+  <ul>
+    <li><strong>Despesas:</strong> Moradia &gt; Aluguel; Alimentação &gt; Supermercado; Saúde &gt; Consulta.</li>
+    <li><strong>Receitas:</strong> Salário &gt; Salário Fixo; Investimentos &gt; Dividendos; Freelance &gt; Projeto.</li>
+  </ul>
+</div>
+</div>
+
+<div class="step"><div class="step-n">5</div>
+<div>
+  Preencha <strong>descrição opcional</strong> (ex: "Supermercado Zona Sul") e ajuste a <strong>data</strong> se necessário. Toque em <strong>Salvar</strong>.
+</div>
+</div>
+
+<div class="success">
+  <strong>✅ Pronto!</strong> O lançamento aparece imediatamente no Dashboard, no Relatório e recalcula automáticamente meta, totais, gráficos e saldo.
+</div>
+
+<h2 id="categorias">5. Tabela de categorias disponíveis</h2>
+
+<h3>5.1. Despesas (saídas)</h3>
+<table>
+  <thead><tr><th>Categoria</th><th>Ícone</th><th>Tipo</th><th>Subcategorias</th></tr></thead>
+  <tbody>
+    <tr><td>🏠 Moradia</td><td>🏠</td><td><span class="tag b">Fixa</span></td><td>Aluguel, Financiamento, IPTU, Seguro, Manutenção, Serviços</td></tr>
+    <tr><td>💳 Cartão de Crédito</td><td>💳</td><td><span class="tag o">Variável</span></td><td>Cartão 1, Cartão 2, Cartão 3</td></tr>
+    <tr><td>⛽ Transporte</td><td>⛽</td><td><span class="tag o">Variável</span></td><td>Gasolina, Ônibus, Uber/Táxi, Manutenção, Seguro, IPVA</td></tr>
+    <tr><td>🍔 Alimentação</td><td>🍔</td><td><span class="tag o">Variável</span></td><td>Supermercado, Restaurante, Delivery, Lanches</td></tr>
+    <tr><td>🏥 Saúde</td><td>🏥</td><td><span class="tag o">Variável</span></td><td>Plano de Saúde, Consulta 🩺, Medicamentos, Exames, Dentista</td></tr>
+    <tr><td>🎮 Lazer</td><td>🎮</td><td><span class="tag o">Variável</span></td><td>Cinema, Streaming, Viagem, Academia, Jogos</td></tr>
+  </tbody>
+</table>
+
+<h3>5.2. Receitas (entradas)</h3>
+<table>
+  <thead><tr><th>Categoria</th><th>Ícone</th><th>Subcategorias</th></tr></thead>
+  <tbody>
+    <tr><td>💼 Salário</td><td>💼</td><td>Salário Fixo, Hora Extra, Vale Refeição / Alimentação</td></tr>
+    <tr><td>🎁 Bônus &amp; Comissões</td><td>🎁</td><td>Comissão, Premiação, 13º Salário</td></tr>
+    <tr><td>🧑‍💻 Freelance / PJ</td><td>🧑‍💻</td><td>Projeto, Consultoria</td></tr>
+    <tr><td>📈 Investimentos</td><td>📈</td><td>Dividendos, Juros / CDB, Rendimento</td></tr>
+    <tr><td>🏘️ Aluguel Recebido</td><td>🏘️</td><td>Imóvel, Sala Comercial</td></tr>
+    <tr><td>🛍️ Vendas / Revenda</td><td>🛍️</td><td>Produtos, Serviços, Usados</td></tr>
+    <tr><td>🆘 Benefícios</td><td>🆘</td><td>Auxílio Governo, Bolsa, Aposentadoria</td></tr>
+    <tr><td>💸 Outras Receitas</td><td>💸</td><td>Presente, Herança, Reembolso</td></tr>
+  </tbody>
+</table>
+
+<h2 id="meta">6. Como usar a Meta de Gastos do Mês</h2>
+
+<p>A meta é o valor <strong>MÁXIMO</strong> que você quer gastar no mês. Ela é calculada com base na sua receita para deixar uma sobra planejada.</p>
+
+<div class="success">
+  <strong>Exemplo prático:</strong> Receita = R$ 3.500,00 · Meta de gastos = R$ 2.500,00 · <strong>Sobra planejada = R$ 1.000,00</strong>.
+</div>
+
+<div class="step"><div class="step-n">1</div>
+<div>Toque no chip <span class="tag b">🔔 Meta</span> no canto superior direito do cabeçalho (fica azul quando definida).</div>
+</div>
+<div class="step"><div class="step-n">2</div>
+<div>Veja sua <strong>receita atual já cadastrada</strong> (valor em verde).</div>
+</div>
+<div class="step"><div class="step-n">3</div>
+<div>
+  Escolha a meta de 3 maneiras:
+  <ol>
+    <li>Toque em <strong>"Sugestão 80% da receita"</strong> (regra 80/20).</li>
+    <li>Use os presets rápidos: R$ 1.500 · 2.500 · 3.500 · 5.000 · 7.500 · 10.000.</li>
+    <li>Digite o valor manualmente no campo com máscara.</li>
+  </ol>
+</div>
+</div>
+<div class="step"><div class="step-n">4</div>
+<div>
+  Acompanhe em tempo real:
+  <ul>
+    <li><strong>Ainda posso gastar</strong> (verde) — Meta − Total já gasto.</li>
+    <li><strong>Estouro</strong> (vermelho) — se gastou mais do que a meta.</li>
+    <li><strong>Sobra planejada</strong> — Receita − Meta.</li>
+    <li><strong>Sobra real hoje</strong> — Receita − Total de gastos do mês.</li>
+  </ul>
+</div>
+</div>
+
+<h2 id="perfil">7. Cadastro de Perfil (nome e foto)</h2>
+
+<div class="step"><div class="step-n">1</div>
+<div>Toque no círculo da foto (ou iniciais) no canto superior esquerdo do cabeçalho.</div>
+</div>
+<div class="step"><div class="step-n">2</div>
+<div>Digite seu nome (substitui "Olá, Minha Família").</div>
+</div>
+<div class="step"><div class="step-n">3</div>
+<div>Toque em "📷 Galeria" para escolher da galeria ou "📸 Câmera" para tirar foto nova.</div>
+</div>
+<div class="step"><div class="step-n">4</div>
+<div>Toque em <strong>💾 Salvar</strong> — suas iniciais ou foto aparecem no Dashboard e na tela Relatório.</div>
+</div>
+
+<div class="warn">
+  <strong>💡 Privacidade:</strong> A foto é convertida para Base64 e armazenada 100% localmente no seu dispositivo — nunca é enviada pela internet.
+</div>
+
+<h2 id="relatorio">8. Como usar o Relatório de Gastos</h2>
+
+<p>A tela Relatório (ícone 📋 na barra inferior) concentra todos os dados do mês em um só lugar:</p>
+<ul>
+  <li><strong>Resumo do mês:</strong> total gasto, quantidade de lançamentos, fixas vs variáveis, meta e sobra real.</li>
+  <li><strong>Gráfico colorido por categoria:</strong> barras horizontais ordenadas do maior para o menor gasto, com R$ e % do total.</li>
+  <li><strong>Busca:</strong> digite palavras-chave (ex: "uber" ou "supermercado") para filtrar a lista.</li>
+  <li><strong>Chips de filtro:</strong> Todos · Fixas · Variáveis · Clique em qualquer categoria para filtrar só ela.</li>
+  <li><strong>Total listado:</strong> soma automática dos lançamentos atualmente filtrados.</li>
+</ul>
+
+<h2 id="graficos">9. Por que os gráficos de categoria agora sempre aparecem?</h2>
+<p>Antes, o app mostrava a barra de progresso da categoria apenas se você definisse um orçamento (budget). Agora:</p>
+<ul>
+  <li>Se houver orçamento → progresso = <code>gasto / orçamento</code> (com aviso vermelho quando ≥ 85%).</li>
+  <li><strong>Sem orçamento mas com gastos</strong> → progresso visual = % da categoria que mais gastou no mês. Ex: se Moradia gastou R$ 2.000 (a maior), Alimentação R$ 800 aparece com 40% da barra, sempre visível.</li>
+</ul>
+
+<h2 id="regras">10. Regras de negócio do app</h2>
+<ul>
+  <li><strong>Saldo disponível:</strong> Receitas totais − Despesas totais do mês.</li>
+  <li><strong>Cores do Saldo:</strong> Verde ≥ R$ 500 · Amarelo &lt; R$ 500 · Vermelho &lt; R$ 200.</li>
+  <li><strong>Compromissos do Mês:</strong> soma TUDO (lançamentos gerais, cartões, moradia e outros serviços — usa os lançamentos como fonte da verdade).</li>
+  <li><strong>Meta % progresso:</strong> <code>Total despesas / Meta mensal × 100</code>. Atualizada em todo lançamento novo/editado/excluído.</li>
+  <li><strong>Categoria.spent:</strong> recalculado sempre a partir dos lançamentos (evita inconsistências em gráficos).</li>
+</ul>
+
+<h2 id="offline">11. Seus dados — segurança e privacidade</h2>
+<div class="danger">
+  <strong>🔒 Armazenamento 100% local:</strong> O app usa AsyncStorage nativo do Android. NENHUM dado vai para nuvem, nenhuma conta é criada, nenhuma telemetria é enviada.
+</div>
+<p>⚠️ Consequência importante:</p>
+<ul>
+  <li>Se desinstalar o app, trocar de celular ou formatar, <strong>os dados serão perdidos</strong>.</li>
+  <li>Recomendação: faça exportação/backup manual regularmente (funcionalidade de exportação CSV pode ser adicionada sob demanda).</li>
+</ul>
+
+<h2 id="problemas">12. Solução de problemas comuns</h2>
+<table>
+  <thead><tr><th>Problema</th><th>Causa provável</th><th>Como resolver</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>ADB "unauthorized" no Xperia RX8MA1461QA</td>
+      <td>Depuração USB não autorizada no celular</td>
+      <td>Rode <code>autorizar-dispositivo.cmd</code>. No popup do celular, marque "Sempre permitir". Reinicie o cabo.</td>
+    </tr>
+    <tr>
+      <td>Expo não encontra o dispositivo</td>
+      <td>Servidor ADB travado / drivers</td>
+      <td>Rode <code>instalar-e-autorizar-usb.cmd</code> ou use Expo Go por QR Code/Wi-Fi.</td>
+    </tr>
+    <tr>
+      <td>Warning "rota não encontrada" no profile</td>
+      <td>Cache antigo do Metro</td>
+      <td>Feche tudo e inicie com <code class="cmd">npx expo start --clear</code>.</td>
+    </tr>
+    <tr>
+      <td>App crasha ao abrir "Text strings must be rendered"</td>
+      <td>Dados antigos do storage sem categorias novas</td>
+      <td>Dados migram automaticamente — apenas inicie com <code>--clear</code>.</td>
+    </tr>
+    <tr>
+      <td>Foto não aparece após selecionar</td>
+      <td>Permissão negada para galeria/câmera</td>
+      <td>Na próxima vez que abrir a tela de perfil, aceite a permissão. Alternativa: Permissões Android &gt; Meu Orçamento &gt; Armazenamento e Câmera &gt; Permitir.</td>
+    </tr>
+    <tr>
+      <td>Gráfico da categoria sempre vazio</td>
+      <td>Budget = 0 e sem lançamentos</td>
+      <td>Basta lançar pelo menos 1 despesa — a barra aparece proporcional à maior categoria.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="atalhos">13. Atalhos do teclado no terminal Metro</h2>
+<table>
+  <thead><tr><th>Tecla</th><th>Ação</th></tr></thead>
+  <tbody>
+    <tr><td><code class="cmd">a</code></td><td>Abrir no Android (dispositivo USB / emulador)</td></tr>
+    <tr><td><code class="cmd">w</code></td><td>Abrir versão web no navegador (Chrome/Edge)</td></tr>
+    <tr><td><code class="cmd">i</code></td><td>Abrir no iOS (apenas macOS)</td></tr>
+    <tr><td><code class="cmd">r</code></td><td>Recarregar (reload) o app</td></tr>
+    <tr><td><code class="cmd">m</code></td><td>Abrir menu dev no celular (shake)</td></tr>
+    <tr><td><code class="cmd">j</code></td><td>Abrir debugger</td></tr>
+    <tr><td><code class="cmd">Ctrl + C</code></td><td>Parar servidor Metro</td></tr>
+  </tbody>
+</table>
+
+<h2 id="scripts">14. Scripts .cmd disponíveis</h2>
+<p>Na pasta <code>c:\MeuOrsamento</code>:</p>
+<ul>
+  <li><strong><code>autorizar-dispositivo.cmd</code></strong> — reinicia ADB, mata servidor, re-scaneia dispositivos para corrigir "unauthorized".</li>
+  <li><strong><code>instalar-e-autorizar-usb.cmd</code></strong> — passo a passo completo para ativar depuração USB no Sony Xperia.</li>
+  <li><strong><code>gerar-pdf-manual.cmd</code></strong> — gera novamente este manual em PDF a partir do HTML.</li>
+</ul>
+
+<h2 id="suporte">15. Dúvidas e próximos passos</h2>
+<p>Se precisar de novas funcionalidades, entre em contato. Exemplos que podem ser adicionados:</p>
+<ul>
+  <li>Exportação de lançamentos para CSV/Excel.</li>
+  <li>Lembretes e contas a pagar com vencimento.</li>
+  <li>Planejamento anual e comparação mês vs mês.</li>
+  <li>Multi-usuário (vários membros da família com login).</li>
+  <li>Categorização automática por IA usando descrição.</li>
+</ul>
+
+<div class="footer">
+  © 2026 Meu Orçamento · Controle Financeiro Familiar · 100% Offline<br>
+  Feito com Expo SDK 54 · React Native · AsyncStorage
+</div>
+
+</body>
+</html>
