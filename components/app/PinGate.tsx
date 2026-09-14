@@ -11,6 +11,8 @@ import {
 import { AppColors, Radius, Shadow } from '@/constants/theme';
 import { getAppData, verifyAppPin } from '@/services/storage';
 
+const SECURITY_LOAD_TIMEOUT_MS = 4000;
+
 export default function PinGate({ children }: PropsWithChildren) {
   const [status, setStatus] = useState<'loading' | 'locked' | 'unlocked'>('loading');
   const [pin, setPin] = useState('');
@@ -19,16 +21,25 @@ export default function PinGate({ children }: PropsWithChildren) {
 
   const loadSecurityState = useCallback(async () => {
     try {
-      const appData = await getAppData();
+      const appData = await Promise.race([
+        getAppData(),
+        new Promise<never>((_, reject) =>
+          setTimeout(() => reject(new Error('security_load_timeout')), SECURITY_LOAD_TIMEOUT_MS)
+        ),
+      ]);
       const hasPin = !!appData.security?.pinHash;
 
       if (!hasPin) {
+        setError('');
         setStatus('unlocked');
         return;
       }
 
+      setError('');
       setStatus('locked');
     } catch {
+      // Se a leitura inicial falhar ou travar, não bloqueamos o app em loading infinito.
+      setError('Nao foi possivel validar a seguranca automaticamente. O app foi liberado para continuar.');
       setStatus('unlocked');
     }
   }, []);
@@ -66,6 +77,7 @@ export default function PinGate({ children }: PropsWithChildren) {
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color={AppColors.primary} />
         <Text style={styles.loadingText}>Carregando seguranca do app...</Text>
+        {!!error && <Text style={styles.loadingErrorText}>{error}</Text>}
       </View>
     );
   }
@@ -122,6 +134,13 @@ const styles = StyleSheet.create({
   loadingText: {
     color: AppColors.text.secondary,
     fontSize: 14,
+    textAlign: 'center',
+  },
+  loadingErrorText: {
+    color: AppColors.warning,
+    fontSize: 13,
+    textAlign: 'center',
+    maxWidth: 360,
   },
   lockContainer: {
     flex: 1,
