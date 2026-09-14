@@ -1,9 +1,22 @@
 import { ScrollViewStyleReset } from 'expo-router/html';
 import type { PropsWithChildren } from 'react';
 
-import { withBaseUrl } from '@/constants/web';
+import { getBaseUrl, withBaseUrl } from '@/constants/web';
 
 export default function Root({ children }: PropsWithChildren) {
+  const baseUrl = getBaseUrl();
+  const normalizeBaseUrlScript = baseUrl
+    ? `
+      (function() {
+        var baseUrl = ${JSON.stringify(baseUrl)};
+        var pathname = window.location.pathname;
+        if (pathname === baseUrl) {
+          window.location.replace(baseUrl + '/' + window.location.search + window.location.hash);
+        }
+      })();
+    `
+    : '';
+
   return (
     <html lang="pt-BR">
       <head>
@@ -21,6 +34,9 @@ export default function Root({ children }: PropsWithChildren) {
         <link rel="icon" href={withBaseUrl('/icon-192.png')} />
         <link rel="manifest" href={withBaseUrl('/manifest.json')} />
         <link rel="apple-touch-icon" href={withBaseUrl('/icon-192.png')} />
+        {!!normalizeBaseUrlScript && (
+          <script dangerouslySetInnerHTML={{ __html: normalizeBaseUrlScript }} />
+        )}
         <ScrollViewStyleReset />
       </head>
       <body>{children}</body>
